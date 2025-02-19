@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>퀴즈 수정</h1>
+<form th:action="@{/admin/updateQuiz}" method="post" th:object="${quiz}">
+  <input type="hidden" th:field="*{no}">
+  <div>
+    <label>퀴즈 내용 입력</label>
+    <input type="text" id="content" th:field="*{content}">
+  </div>
+  <div>
+    <label>정답 체크</label>
+    <select id="answer" th:field="*{answer}">
+      <option value="true">O</option>
+      <option value="false">X</option>
+    </select>
+  </div>
+  <button type="submit">퀴즈 수정</button>
+</form>
+<a th:href="@{/admin}">관리자 메인으로 돌아가기</a>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Quiz Game</title>
+</head>
+<body>
+<h1>퀴즈 게임</h1>
+
+<!-- 퀴즈 문제 출력 -->
+<div>
+  <p th:text="${quiz.content}"></p>  <!-- 문제 내용 -->
+</div>
+
+<!-- 답변 선택 -->
+<form th:action="@{/quiz/submit}" method="post">
+  <div>
+    <label>
+      <input type="radio" name="answer" value="true" th:checked="${quiz.answer == 'true'}"> O
+    </label>
+    <label>
+      <input type="radio" name="answer" value="false" th:checked="${quiz.answer == 'false'}"> X
+    </label>
+  </div>
+
+  <!-- 숨겨진 필드로 문제 번호 전송 -->
+  <input type="hidden" name="quizNo" th:value="${quiz.no}">
+
+  <button type="submit">정답 제출</button>
+</form>
+
+<!--<a th:href="@{/home}">게임 종료</a>-->
+</body>
+</html>
