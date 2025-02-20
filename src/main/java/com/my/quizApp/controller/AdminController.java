@@ -1,6 +1,7 @@
 package com.my.quizApp.controller;
 
 import com.my.quizApp.dto.QuizDto;
+import com.my.quizApp.service.MemberService;
 import com.my.quizApp.service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ import java.util.List;
 public class AdminController {
     @Autowired
     QuizService quizService;
+
+    @Autowired
+    MemberService memberService;
 
     @GetMapping("/home")
     public String adminIndex(Model model) {
@@ -46,14 +50,20 @@ public class AdminController {
 
     // 퀴즈 삭제
     @GetMapping("/delete/{no}")
-    public String deleteQuiz(@PathVariable("no") Long no) {
+    public String deleteQuiz(
+            @PathVariable("no") Long no,
+            RedirectAttributes redirectAttributes
+            ) {
+        redirectAttributes.addFlashAttribute("msg", "선택한 퀴즈가 삭제되었습니다");
         quizService.deleteQuiz(no); // 퀴즈 삭제
         return "redirect:/admin/listQuiz"; // 삭제 후 목록으로 리다이렉트
     }
 
     // 퀴즈 수정 페이지
     @GetMapping("/update/{no}")
-    public String updateQuiz(@PathVariable("no") Long no, Model model) {
+    public String updateQuiz(
+            @PathVariable("no") Long no, Model model
+    ) {
         QuizDto quizDto = quizService.findById(no);
         model.addAttribute("quiz", quizDto);
         return "/admin/updateQuiz"; // 퀴즈 수정 폼
@@ -62,9 +72,29 @@ public class AdminController {
         // 퀴즈 수정 처리
     @PostMapping("updateQuiz")
     public String updateQuiz(
-            @ModelAttribute("quiz") QuizDto quizDto
+            @ModelAttribute("quiz") QuizDto quizDto,
+            RedirectAttributes redirectAttributes
     ) {
+        redirectAttributes.addFlashAttribute("msg", "선택한 퀴즈가 수정되었습니다");
         quizService.updateQuiz(quizDto); // 퀴즈 수정
         return "redirect:/admin/listQuiz"; // 수정 후 목록으로 리다이렉트
+    }
+
+    // 회원 목록 보기
+    @GetMapping("/memberList")
+    public String memberList(Model model) {
+        model.addAttribute("memberList", memberService.findAllMember());
+        return "admin/listMember";
+    }
+
+    // 회원 삭제하기
+    @GetMapping("/deleteMember/{no}")
+    public String deleteMember(
+            @PathVariable("no") Long no,
+            RedirectAttributes redirectAttributes
+    ) {
+        redirectAttributes.addFlashAttribute("msg", "회원이 삭제되었습니다.");
+        memberService.deleteMember(no);
+        return "redirect:/admin/memberList";
     }
 }

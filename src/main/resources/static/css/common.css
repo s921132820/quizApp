@@ -1,0 +1,10 @@
+body {padding:20px;}
+
+/* button */
+.btn {}
+.btn-main{backgroung:#666; color:#fff}
+.btn-login{}
+
+
+/* login view */
+.login-input {border:1px solid red;}

@@ -17,11 +17,13 @@ import java.time.LocalDateTime;
 @ToString(callSuper = true)
 public class Member extends BaseEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long no;
     private String id;
     private String password;
     private boolean status;
+    @Column(name = "answer_true")
     private int answerTrue;
+    @Column(name = "answer_false")
     private int answerFalse;
 }

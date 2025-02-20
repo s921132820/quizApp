@@ -54,8 +54,17 @@ public class LoginController {
         MemberDto loginUser = (MemberDto) session.getAttribute("loginUser");
         if (loginUser != null) {
             model.addAttribute("member", loginUser);
+            Long memberNo = loginUser.getNo();
+            // answer_true와 answer_false 초기화
+            memberService.resetAnswerCounts(memberNo);
             return "member/index";
         }
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate(); // 세션 삭제
         return "redirect:/";
     }
 }

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:include="~{navbar :: navbar}"></div>
+<h1>퀴즈 멤버 목록</h1>
+<th:block th:unless="${msg}==null">
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    [[ ${msg} ]]
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+</th:block>
+<table>
+  <thead>
+  <tr>
+    <td>No</td>
+    <td>ID</td>
+    <td>정답개수</td>
+    <td>오답개수</td>
+    <td>회원삭제</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="member, stat : ${memberList}">
+    <td th:text="${stat.count}"></td>
+    <td th:text="${member.id}"></td>
+    <td th:text="${member.answerTrue}"></td>
+    <td th:text="${member.answerFalse}"></td>
+    <td>
+      <a th:href="@{/admin/deleteMember/{no}(no=${member.no})}"><button>삭제</button></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a th:href="@{/admin}">관리자 메인으로 돌아가기</a>
+</body>
+</html>

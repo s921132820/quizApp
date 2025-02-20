@@ -54,13 +54,5 @@ public class MemberController {
         return "redirect:/";
     }
 
-    // 퀴즈 게임 관련
-    @GetMapping("quizGame")
-    public String quizGame(Model model) {
-        QuizDto quizDto = quizService.getRandomQuiz();
-        model.addAttribute("quiz", quizDto);
-        return "member/quizGame";
-    }
-
 
 }
