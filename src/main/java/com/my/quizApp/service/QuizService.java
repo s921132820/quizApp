@@ -25,16 +25,19 @@ public class QuizService {
     @Autowired
     MemberRepository memberRepository;
 
+    // 퀴즈 목록
     public List<QuizDto> getAllQuiz() {
         List<Quiz> quizList = quizRepository.findAll();
         return quizList.stream().map(QuizDto::fromQuizEntity).toList();
     }
 
+    // 퀴즈 저장
     public void saveQuiz(QuizDto quizDto) {
         Quiz quiz = QuizDto.fromQuizDto(quizDto);
         quizRepository.save(quiz);
     }
 
+    //퀴즈 삭제
     public void deleteQuiz(Long no) {
         quizRepository.deleteById(no);
     }
@@ -115,6 +118,4 @@ public class QuizService {
             throw new MemberNotFoundException("해당 회원이 존재하지 않습니다.");
         }
     }
-
-
 }

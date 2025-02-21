@@ -4,28 +4,22 @@
   <meta charset="UTF-8">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="/js/quiz.js"></script>
   <title>퀴즈 게임</title>
 </head>
 <body>
 <div th:include="~{navbar :: navbar}"></div>
 <h1>퀴즈 게임</h1>
 
-<form action="#" th:action="@{/member/submitAnswers}" method="post">
-  <div th:each="quiz, iterStat : ${quizzes}">
-    <p th:text="'퀴즈 ' + ${iterStat.index + 1} + ': ' + ${quiz.content}"></p>
-
-    <!-- OX 선택 버튼 -->
-    <label>
-      <input type="radio" th:name="'answer_' + ${quiz.no}" th:value="true" /> O
-    </label>
-    <label>
-      <input type="radio" th:name="'answer_' + ${quiz.no}" th:value="false" /> X
-    </label>
+<div id="quiz-container">
+  <h3 id="question">퀴즈를 불러오는 중...</h3>
+  <div id="answer-buttons">
+    <button id="true-btn">O</button>
+    <button id="false-btn">X</button>
   </div>
-
-  <button type="submit">결과 제출</button>
-</form>
+</div>
 
 <a th:href="@{/quizGame}">게임 다시 시작</a>
+
 </body>
 </html>

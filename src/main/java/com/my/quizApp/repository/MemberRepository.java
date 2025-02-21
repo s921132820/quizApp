@@ -18,5 +18,5 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query("UPDATE Member m SET m.answerTrue = 0, m.answerFalse = 0 WHERE m.id = :memberNo")
     void resetAnswerCounts(@Param("memberNo") Long memberNo);
 
-
+    boolean existsById(String id);
 }

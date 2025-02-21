@@ -9,8 +9,8 @@
 <body>
 <div th:include="~{navbar :: navbar}"></div>
 <h1>퀴즈 결과</h1>
-<p th:text="'맞은 개수: ' + ${correctCount}"></p>
-<p th:text="'틀린 개수: ' + ${wrongCount}"></p>
+<p>맞은 개수: <span th:text="${correctCount}">0</span></p>
+<p>틀린 개수: <span th:text="${wrongCount}">0</span></p>
 
 <a th:href="@{/quizGame}">게임 다시 시작</a>
 </body>

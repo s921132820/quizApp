@@ -64,4 +64,9 @@ public class MemberService {
     public void deleteMember(Long no) {
         memberRepository.deleteById(no);
     }
+
+    public boolean isIdExists(String id) {
+        System.out.println(id);
+        return memberRepository.existsById(id);
+    }
 }

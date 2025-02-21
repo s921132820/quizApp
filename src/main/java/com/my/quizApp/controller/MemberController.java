@@ -10,12 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
+//@RestController
 @RequestMapping("member")
 @Slf4j
 public class MemberController {
@@ -54,5 +56,15 @@ public class MemberController {
         return "redirect:/";
     }
 
+    // 회원가입 시 멤버 아이디 중복체크
+    @GetMapping("/checkId")
+    @ResponseBody
+    public Map<String, Boolean> checkId(@RequestParam String id) {
+        log.info("####### 아이디 중복 확인 요청: " + id);
+        boolean exists = memberService.isIdExists(id);
 
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("exists", exists);
+        return response;
+    }
 }

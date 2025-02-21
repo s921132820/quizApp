@@ -20,13 +20,6 @@ public class AdminController {
     @Autowired
     MemberService memberService;
 
-    @GetMapping("/home")
-    public String adminIndex(Model model) {
-        List<QuizDto> quizList = quizService.getAllQuiz();
-        model.addAttribute("quizList", quizList);
-        return "admin/index";
-    }
-
     // 퀴즈 등록 페이지
     @GetMapping("/insertQuiz")
     public String showQuizForm(Model model) {
@@ -80,6 +73,7 @@ public class AdminController {
         return "redirect:/admin/listQuiz"; // 수정 후 목록으로 리다이렉트
     }
 
+    // 회원관련 Controller
     // 회원 목록 보기
     @GetMapping("/memberList")
     public String memberList(Model model) {

@@ -1,5 +1,8 @@
 body {padding:20px;}
 
+/* warning massage */
+.warning-msg{color:red; display:none;}
+
 /* button */
 .btn {}
 .btn-main{backgroung:#666; color:#fff}

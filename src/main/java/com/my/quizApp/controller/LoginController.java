@@ -13,16 +13,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class LoginController {
-
     @Autowired
     private MemberService memberService;
 
+    // 로그인 화면
     @GetMapping("/")
     public String loginPage(Model model) {
         model.addAttribute("member", new MemberDto());
         return "login"; // login.html을 반환
     }
 
+    // 로그인 성공 후
     @PostMapping("/home")
     public String login(
             @ModelAttribute("member") MemberDto member,
