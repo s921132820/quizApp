@@ -11,7 +11,7 @@
 <nav th:fragment="navbar" class="nav">
   <div class="nav-wrap">
     <div class="logo-wrap">
-      <a class="navbar-brand" href="/">Quiz Game</a>
+      <a class="navbar-brand" th:href="@{/home}">Quiz Game</a>
     </div>
     <div class="userinfo-wrap">
       <div class="btn-logout" th:if="${session.loginUser != null}">
