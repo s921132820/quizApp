@@ -10,26 +10,28 @@
     <title>Title</title>
 </head>
 <body>
-<h1>회원가입</h1>
-<form th:action="@{/member/insert}" method="post" th:object="${memberDto}">
-  <div>
-    <label for="id">id</label>
-    <input type="text" name="id" th:field="*{id}">
-    <button type="button" id="btn-checkId">아이디 중복확인</button>
-    <span id="id-check-msg" class="warning-msg"></span>
-  </div>
-  <div>
-    <label for="password">비밀번호</label>
-    <input type="password" name="password" th:field="*{password}">
-  </div>
-  <div>
-    <label for="confirm-password">비밀번호 확인</label>
-    <input type="password" id="confirm-password">
-  </div>
-  <p id="pw-warning" class="warning-msg">비밀번호를 입력하세요</p>
-  <p id="id-warning" class="warning-msg">아이디를 입력하세요</p>
-  <p id="confirm-warning" class="warning-msg">비밀번호가 일치하지 않습니다.</p>
-  <button type="submit" id="btn-submit">제출</button>
-</form>
+<div class="container container-md">
+  <h1>회원가입</h1>
+  <form th:action="@{/member/insert}" method="post" th:object="${memberDto}" class="input-group">
+    <div>
+      <label for="id">id</label>
+      <input type="text" name="id" th:field="*{id}">
+      <button type="button" id="btn-checkId">아이디 중복확인</button>
+      <span id="id-check-msg" class="warning-msg"></span>
+    </div>
+    <div>
+      <label for="password">비밀번호</label>
+      <input type="password" name="password" th:field="*{password}">
+    </div>
+    <div>
+      <label for="confirm-password">비밀번호 확인</label>
+      <input type="password" id="confirm-password">
+    </div>
+    <p id="pw-warning" class="warning-msg">비밀번호를 입력하세요</p>
+    <p id="id-warning" class="warning-msg">아이디를 입력하세요</p>
+    <p id="confirm-warning" class="warning-msg">비밀번호가 일치하지 않습니다.</p>
+    <button type="submit" id="btn-submit">제출</button>
+  </form>
+</div>
 </body>
 </html>

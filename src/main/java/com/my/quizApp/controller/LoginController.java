@@ -43,8 +43,17 @@ public class LoginController {
     }
 
     @GetMapping("/admin")
-    public String adminHome() {
-        return "admin/index"; // 관리자 메인 페이지
+    public String adminHome(
+            HttpSession session,
+            Model model
+    ) {
+        MemberDto loginUser = (MemberDto) session.getAttribute("loginUser");
+
+        if (loginUser != null) {
+            model.addAttribute("member", loginUser);
+            return "admin/index";
+        }
+        return "redirect:/";
     }
 
     @GetMapping("/member")

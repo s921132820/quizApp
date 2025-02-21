@@ -1,13 +1,40 @@
-body {padding:20px;}
+body {margin:0px;}
 
 /* warning massage */
 .warning-msg{color:red; display:none;}
+
+/* padding */
+.part-t-10{padding-top:10px}
+.part-t-20{padding-top:20px}
 
 /* button */
 .btn {}
 .btn-main{backgroung:#666; color:#fff}
 .btn-login{}
 
+/* Header */
+.nav-wrap{padding: 10px;background:#eaeaea;display:flex; justify-content: space-between;}
+
+/* container */
+.container{width:90%; margin:0 auto;}
 
 /* login view */
-.login-input {border:1px solid red;}
+.login-container {height:100vh; display:flex; align-items:center; justify-content:center;}
+.login-wrap{box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);padding: 50px 30px;text-align: center;border-radius: 15px; width:350px}
+.login-wrap .login-form {max-width: 550px; margin:0 auto;text-align:center;display: block;}
+.login-wrap .login-form input{box-sizing:border-box;padding: 20px;}
+.login-wrap .login-form .signup{text-decoration:none; display:block; font-size:14px}
+
+.input-box {border: 1px solid #d1d1d1;  width: 100%; height: 30px; margin-bottom: 5px;}
+#btn-login {
+              outline: 0;
+              background: #3c83ff;
+              width: 100%;
+              border: 0;
+              padding: 15px;
+              color: #FFF;
+              font-size: 14px;
+              -webkit-transition: all 0.3 ease;
+              transition: all 0.3 ease;
+              cursor: pointer;
+              }
