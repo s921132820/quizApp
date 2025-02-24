@@ -23,6 +23,19 @@ public class LoginController {
         return "login"; // login.html을 반환
     }
 
+    @GetMapping("home")
+    public String home(HttpSession session) {
+        MemberDto loginUser = (MemberDto) session.getAttribute("loginUser");
+        if (loginUser !=null) {
+            if("root".equals(loginUser.getId())) {
+                return "redirect:/admin";
+            } else {
+                return "redirect:/member";
+            }
+        }
+        return "redirect:/";
+    }
+
     // 로그인 성공 후
     @PostMapping("/home")
     public String login(
