@@ -10,7 +10,9 @@
 </head>
 <body>
 <div th:include="~{navbar :: navbar}"></div>
-<h1>환영합니다.  <span th:text="${member.id}"></span>님</h1>
-<a th:href="@{/quizGame}">게임 스타트</a>
+<div class="tx-center">
+    <h1>환영합니다.  <span th:text="${member.id}"></span>님</h1>
+    <a th:href="@{/quizGame}">게임 스타트</a>
+</div>
 </body>
 </html>

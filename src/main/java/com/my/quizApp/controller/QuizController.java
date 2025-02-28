@@ -50,6 +50,10 @@ public class QuizController {
         session.setAttribute("quizzes", quizzes);
         session.setAttribute("currentIndex", 0);
 
+        // 🔥 현재 인덱스와 전체 문제 개수를 모델에 추가
+        model.addAttribute("currentIndex", 1); // 1부터 시작
+        model.addAttribute("totalCount", quizzes.size());
+
         return "member/quizGame";  // member/quizGame.html 템플릿 렌더링
     }
 

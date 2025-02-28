@@ -6,10 +6,10 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -38,21 +38,28 @@ public class LoginController {
 
     // 로그인 성공 후
     @PostMapping("/home")
-    public String login(
-            @ModelAttribute("member") MemberDto member,
-            HttpSession session
-    ) {
+    @ResponseBody
+    public Map<String, Object> login(@RequestBody MemberDto member, HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+
         MemberDto findMember = memberService.findByIdAndPassword(member.getId(), member.getPassword());
         if (findMember != null) {
             session.setAttribute("loginUser", findMember);
-            // id가 root이면 admin.html로 이동
+
+            // 로그인 성공 시 리다이렉트할 URL 전달
             if ("root".equals(findMember.getId())) {
-                return "redirect:/admin";
+                response.put("status", "success");
+                response.put("redirectUrl", "/admin");
             } else {
-                return "redirect:/member"; // 일반 유저는 index.html
+                response.put("status", "success");
+                response.put("redirectUrl", "/member");
             }
+        } else {
+            response.put("status", "fail");
+            response.put("message", "아이디 또는 비밀번호가 올바르지 않습니다.");
         }
-        return "redirect:/login?error=true"; // 로그인 실패 시 다시 로그인 페이지로
+
+        return response;
     }
 
     @GetMapping("/admin")

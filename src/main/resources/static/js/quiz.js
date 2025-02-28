@@ -1,6 +1,7 @@
 let answers = {};
-let currentQuizIndex = 0; // 현재 퀴즈 인덱스
+let currentIndex = 0; // 현재 퀴즈 인덱스
 
+// 다음 퀴즈 요청
 function nextQuiz() {
     fetch('/quizGame/next', { method: 'POST' })
         .then(response => response.json())
@@ -9,7 +10,7 @@ function nextQuiz() {
 
             if (data.submit) {
                 console.log("퀴즈 종료! 답안 제출 시작");
-                submitAnswers(); // 퀴즈 종료 시 자동 제출
+                submitAnswers();
                 return;
             }
 
@@ -17,14 +18,19 @@ function nextQuiz() {
                 let questionElement = document.getElementById("question");
                 let trueBtn = document.getElementById("true-btn");
                 let falseBtn = document.getElementById("false-btn");
+                let indexElement = document.getElementById("currentIndex"); // 추가된 부분
 
-                if (!questionElement || !trueBtn || !falseBtn) {
+                if (!questionElement || !trueBtn || !falseBtn || !indexElement) {
                     console.error("HTML 요소를 찾을 수 없습니다.");
                     return;
                 }
 
                 // 문제 업데이트
                 questionElement.innerText = data.quiz.content || data.quiz.question;
+
+                // 현재 퀴즈 번호 업데이트
+                currentIndex++;
+                indexElement.innerText = currentIndex; // ✅ 화면에 반영
 
                 // 기존 버튼을 제거하고 새로 이벤트 추가
                 trueBtn.replaceWith(trueBtn.cloneNode(true));
@@ -37,12 +43,11 @@ function nextQuiz() {
                 // 새로운 클릭 이벤트 추가
                 trueBtn.addEventListener("click", () => selectAnswer(data.quiz.no, true));
                 falseBtn.addEventListener("click", () => selectAnswer(data.quiz.no, false));
-
-                currentQuizIndex++; // 현재 퀴즈 인덱스 증가
             }
         })
         .catch(error => console.error("퀴즈 로딩 실패", error));
 }
+
 
 function selectAnswer(quizNo, answer) {
     answers[`answer_${quizNo}`] = answer;

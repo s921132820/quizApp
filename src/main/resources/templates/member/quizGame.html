@@ -11,16 +11,17 @@
 </head>
 <body>
 <div th:include="~{navbar :: navbar}"></div>
-<h1>퀴즈 게임</h1>
-<div id="quiz-container">
-  <h3 id="question">퀴즈를 불러오는 중...</h3>
-  <div id="answer-buttons">
-    <button id="true-btn">O</button>
-    <button id="false-btn">X</button>
+<div class="tx-center">
+  <h1>퀴즈 게임</h1>
+  <h4>문제 <span th:text="${currentIndex}" id="currentIndex"></span> / <span th:text="${totalCount}"></span></h4>
+  <div id="quiz-container">
+    <h3 id="question">퀴즈를 불러오는 중...</h3>
+    <div id="answer-buttons">
+      <button id="true-btn">O</button>
+      <button id="false-btn">X</button>
+    </div>
+    <a th:href="@{/quizGame}">게임 다시 시작</a>
   </div>
 </div>
-
-<a th:href="@{/quizGame}">게임 다시 시작</a>
-
 </body>
 </html>
